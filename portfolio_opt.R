@@ -1,8 +1,6 @@
 # Introducci?n a R para Finanzas Cuantitativas
 # Optimizaci?n de un portafolio
-# Autor: Jhonatan Ever Medina Muriel
 
-#Librer?as requeridas
 library("quantmod")
 library("timeSeries")
 library("fPortfolio")
