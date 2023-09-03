@@ -121,9 +121,7 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
       labs(x="Acciones",y="Pesos (%)")
     
     
-###########################################################33
-    
-    # ... (código previo)
+###########################################################
     
     # Calcular la frontera eficiente
     fronteraEff <- portfolioFrontier(RetPort, constraints = "LongOnly")
