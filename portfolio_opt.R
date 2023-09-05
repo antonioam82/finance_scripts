@@ -139,15 +139,23 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
     # Calcular el ratio Sharpe de la cartera LMC
     sharpe_ratio_lmc <- (retorno_cartera_lmc - rf_rate) / volatilidad_cartera_lmc
     
-    # Mostrar los resultados
+    # Calcular la prima de riesgo de la cartera VMG
+    prima_riesgo_vmg <- retorno_cartera_vmg - rf_rate
+    
+    # Calcular la prima de riesgo de la cartera LMC
+    prima_riesgo_lmc <- retorno_cartera_lmc - rf_rate
+    
+    # Mostrar los resultados, incluyendo la prima de riesgo
     cat("Cartera de Varianza Mínima Global (VMG):\n")
     cat("Retorno de la Cartera: ", retorno_cartera_vmg, "\n")
     cat("Volatilidad de la Cartera: ", volatilidad_cartera_vmg, "\n")
+    cat("Prima de Riesgo de la Cartera: ", prima_riesgo_vmg * 100, "\n")
     cat("Ratio Sharpe de la Cartera: ", sharpe_ratio_vmg, "\n\n")
     
     cat("Cartera de Linea de Mercado de Capitales (LMC):\n")
     cat("Retorno de la Cartera: ", retorno_cartera_lmc, "\n")
     cat("Volatilidad de la Cartera: ", volatilidad_cartera_lmc, "\n")
+    cat("Prima de Riesgo de la Cartera: ", prima_riesgo_lmc * 100, "\n")
     cat("Ratio Sharpe de la Cartera: ", sharpe_ratio_lmc, "\n")
     
     
