@@ -1,6 +1,8 @@
 # Introducci?n a R para Finanzas Cuantitativas
 # Optimizaci?n de un portafolio
+# Autor: Jhonatan Ever Medina Muriel
 
+#Librer?as requeridas
 library("quantmod")
 library("timeSeries")
 library("fPortfolio")
@@ -19,7 +21,8 @@ library("ggplot2")
 
 #tickers<-c("TSLA","NEM","NFLX", "BAC","AMZN","JNJ")
 #tickers<-c("TSLA","IBM","NFLX","GOOGL","AMZN","JNJ")
-tickers<-c("JNJ","NVDA","IBM")
+#tickers<-c("JNJ","NVDA","IBM","DIS")
+tickers <- c("ORA.PA","ZURN.SW","BTLCY","NGG")
 #tickers <- c("HD","NVDA")
 
 #Extrayendo la data
@@ -49,6 +52,7 @@ RetPort
 #Calculando la frontera eficiente
 
 fronteraEff <- portfolioFrontier(RetPort, constraints= "LongOnly")
+
 
 #Graficando la frontera
 #En el gr?fico, se pueden incorporar los siguientes elementos:
@@ -98,7 +102,7 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
       geom_bar(stat="identity",position=position_dodge(),colour="black")+
       geom_text(aes(label=sprintf("%.02f %%",VMG_Pesos*100)),
                 position=position_dodge(width=0.9),vjust=-0.25,check_overlap=TRUE)+
-      ggtitle("Pesos de las acciones del portafolio de varianza m?nima global")+
+      ggtitle("Pesos de las acciones del portafolio de varianza minima global")+
       theme(plot.title = element_text(hjust=0.5))+
       labs(x="Acciones",y="Pesos (%)")
       
@@ -120,5 +124,31 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
     
     
 ###########################################################
+    # Calcular el retorno y la volatilidad de la cartera VMG
+    retorno_cartera_vmg <- sum(VMG_Pesos * colMeans(RetPort))
+    volatilidad_cartera_vmg <- sqrt(t(VMG_Pesos) %*% MatrizCov %*% VMG_Pesos)
+    
+    # Calcular el retorno y la volatilidad de la cartera LMC
+    retorno_cartera_lmc <- sum(LMC_Pesos * colMeans(RetPort))
+    volatilidad_cartera_lmc <- sqrt(t(LMC_Pesos) %*% MatrizCov %*% LMC_Pesos)
+    
+    # Calcular el ratio Sharpe de la cartera VMG
+    rf_rate <- 0.0  # Tasa libre de riesgo (puedes ajustarla)
+    sharpe_ratio_vmg <- (retorno_cartera_vmg - rf_rate) / volatilidad_cartera_vmg
+    
+    # Calcular el ratio Sharpe de la cartera LMC
+    sharpe_ratio_lmc <- (retorno_cartera_lmc - rf_rate) / volatilidad_cartera_lmc
+    
+    # Mostrar los resultados
+    cat("Cartera de Varianza Mínima Global (VMG):\n")
+    cat("Retorno de la Cartera: ", retorno_cartera_vmg, "\n")
+    cat("Volatilidad de la Cartera: ", volatilidad_cartera_vmg, "\n")
+    cat("Ratio Sharpe de la Cartera: ", sharpe_ratio_vmg, "\n\n")
+    
+    cat("Cartera de Linea de Mercado de Capitales (LMC):\n")
+    cat("Retorno de la Cartera: ", retorno_cartera_lmc, "\n")
+    cat("Volatilidad de la Cartera: ", volatilidad_cartera_lmc, "\n")
+    cat("Ratio Sharpe de la Cartera: ", sharpe_ratio_lmc, "\n")
+    
     
    
