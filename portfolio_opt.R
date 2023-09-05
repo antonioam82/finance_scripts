@@ -121,35 +121,4 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
     
 ###########################################################
     
-    # Calcular la frontera eficiente
-    fronteraEff <- portfolioFrontier(RetPort, constraints = "LongOnly")
-    
-    # Calcular la cartera de mínima varianza global
-    VMG <- minvariancePortfolio(RetPort, spec = portfolioSpec(), constraints = "LongOnly")
-    VMG_Pesos <- getWeights(VMG)
-    
-    # Calcular la cartera tangente a la frontera eficiente (Línea de Mercado de Capitales)
-    LMC <- tangencyPortfolio(RetPort, spec = portfolioSpec(), constraints = "LongOnly")
-    LMC_Pesos <- getWeights(LMC)
-    
-    # Obtener información de riesgo, retorno y Ratio Sharpe
-    ret_VMG <- sum(VMG_Pesos * colMeans(RetPort))
-    vol_VMG <- sqrt(t(VMG_Pesos) %*% MatrizCov %*% VMG_Pesos)
-    sharpe_VMG <- ret_VMG / vol_VMG
-    
-    ret_LMC <- sum(LMC_Pesos * colMeans(RetPort))
-    vol_LMC <- sqrt(t(LMC_Pesos) %*% MatrizCov %*% LMC_Pesos)
-    sharpe_LMC <- ret_LMC / vol_LMC
-    
-    # Imprimir información por pantalla
-    cat("Cartera de Mínima Varianza Global:\n")
-    cat("-------------------------------\n")
-    cat("Retorno:", ret_VMG, "\n")
-    cat("Volatilidad:", vol_VMG, "\n")
-    cat("Ratio Sharpe:", sharpe_VMG, "\n\n")
-    
-    cat("Cartera Tangente a la Frontera Eficiente:\n")
-    cat("---------------------------------------\n")
-    cat("Retorno:", ret_LMC, "\n")
-    cat("Volatilidad:", vol_LMC, "\n")
-    cat("Ratio Sharpe:", sharpe_LMC, "\n")
+   
