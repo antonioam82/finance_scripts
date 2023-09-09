@@ -1,5 +1,4 @@
-# Instala y carga las librerías necesarias
-install.packages("plotly")
+#Carga las librerías necesarias
 library(plotly)
 
 # Simulación de datos de precios de activos financieros
