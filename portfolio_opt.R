@@ -11,8 +11,6 @@ library("dplyr")
 library("PerformanceAnalytics")
 library("ggplot2")
 
-
-
 ###########################################################
 ###################### PASOS PREVIOS ######################
 ###########################################################
@@ -22,7 +20,8 @@ library("ggplot2")
 #tickers<-c("TSLA","NEM","NFLX", "BAC","AMZN","JNJ")
 #tickers<-c("TSLA","IBM","NFLX","GOOGL","AMZN","JNJ")
 #tickers<-c("JNJ","NVDA","IBM","DIS")
-tickers <- c("ORA.PA","ZURN.SW","BTLCY","NGG")
+#tickers <- c("ORA.PA","ZURN.SW","BTLCY","NGG")
+tickers <- c('GWW','ES','HSY','MCK','NVR')
 #tickers <- c("HD","NVDA")
 
 #Extrayendo la data
@@ -157,6 +156,3 @@ barplot(t(fronteraPesos), main="Pesos de los activos en la Frontera Eficiente",c
     cat("Volatilidad de la Cartera: ", volatilidad_cartera_lmc, "\n")
     cat("Prima de Riesgo de la Cartera: ", prima_riesgo_lmc * 100, "\n")
     cat("Ratio Sharpe de la Cartera: ", sharpe_ratio_lmc, "\n")
-    
-    
-   
