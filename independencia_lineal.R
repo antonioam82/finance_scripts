@@ -8,6 +8,7 @@
 # Esta técnica se emplea para lograr una mayor diversificación
 # en las carteras.
 
+# Cargar libreria 'quantmod'
 library(quantmod)
 
 # Símbolos de las acciones de las empresas
