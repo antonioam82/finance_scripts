@@ -6,7 +6,7 @@
 # obtener una selección de aquellas (3 en este caso) entre 
 # las que existe una menor correlación (mayor independencia)
 # Esta técnica se emplea para lograr una mayor diversificación
-# en las carteras.
+# en las carteras de inversión.
 
 library(quantmod)
 
