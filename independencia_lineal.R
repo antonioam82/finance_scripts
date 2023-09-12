@@ -8,13 +8,13 @@
 # Esta técnica se emplea para lograr una mayor diversificación
 # en las carteras.
 
-# Cargar libreria 'quantmod'
 library(quantmod)
 
 # Símbolos de las acciones de las empresas
 # Reemplaza estos símbolos con los de las empresas que deseas analizar
 #symbols <- c("AAPL", "MSFT", "GOOGL", "AMZN", "KO")
-symbols <- c('KO','AAPL','BAC','CVX','AXP')
+#symbols <- c('KO','AAPL','BAC','CVX','AXP')
+symbols <- c('ACS.MC','MAP.MC','TEF.MC','REP.MC','AENA.MC')
 
 # Descargar datos históricos de Yahoo Finance para las acciones
 getSymbols(symbols, from = "2022-01-01", to = "2023-01-01")
@@ -58,3 +58,4 @@ print(selected_combination)
 print("Dataframe con los retornos de las acciones seleccionadas:")
 print(head(selected_data))
 
+names(selected_data)
