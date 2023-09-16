@@ -3,18 +3,19 @@
 ###################################################################
 
 # El propósito de este script es, dada una listade acciones,  
-# obtener una selección de aquellas (3 en este caso) entre 
-# las que existe una menor correlación (mayor independencia)
+# obtener una selección de aquellas (la mitad en este caso) 
+# entre las que existe una menor correlación (mayor independencia)
 # Esta técnica se emplea para lograr una mayor diversificación
-# en las carteras de inversión.
+# en las carteras.
 
 library(quantmod)
 
 # Símbolos de las acciones de las empresas
 # Reemplaza estos símbolos con los de las empresas que deseas analizar
-#symbols <- c("AAPL", "MSFT", "GOOGL", "AMZN", "KO")
+symbols <- c("AAPL", "MSFT", "GOOGL", "AMZN", "KO", "GM")
 #symbols <- c('KO','AAPL','BAC','CVX','AXP')
-symbols <- c('ACS.MC','MAP.MC','TEF.MC','REP.MC','AENA.MC')
+#symbols <- c('ACS.MC','MAP.MC','TEF.MC','REP.MC','AENA.MC')
+#symbols <- c('G.MI','A2A.MI','TENERGY.AT','PST.MI','PIRC.MI')
 
 # Descargar datos históricos de Yahoo Finance para las acciones
 getSymbols(symbols, from = "2022-01-01", to = "2023-01-01")
@@ -29,7 +30,9 @@ returns_data <- 100 * na.omit(returns(price_data))
 correlation_matrix <- cor(returns_data)
 
 # Definir el tamaño de las submatrices
-subsize <- 3  # Puedes ajustar esto según tus necesidades
+#subsize <- 3  # Puedes ajustar esto según tus necesidades
+subsize <- as.integer(length(symbols)/2) # FILTRAR ÑA MITAD DE LOS ACTIVOS
+subsize
 
 # Encontrar las combinaciones de activos con los determinantes más altos
 combinations <- combn(ncol(returns_data), subsize)
