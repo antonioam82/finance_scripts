@@ -2,7 +2,7 @@
 library(quantmod)
 
 # Establecer el símbolo de la acción y la fuente de datos (Yahoo Finance)
-stock_symbol <- "TSLA"  # Cambia AAPL por el símbolo de la acción que desees
+stock_symbol <- "AAPL"  # Cambia AAPL por el símbolo de la acción que desees
 
 # Obtener los datos históricos de la acción
 getSymbols(stock_symbol, src = "yahoo", from = "2023-01-01")
