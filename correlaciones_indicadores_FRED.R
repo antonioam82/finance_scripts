@@ -141,7 +141,7 @@ produccion_indust <- data.frame(Date = index(get(ticker)), Index = as.numeric(ge
 produccion_indust
 head(produccion_indust)
 
-fecha_predefinida <- as.Date("1970-01-01")
+fecha_predefinida <- as.Date("1992-01-01")
 
 produccion_indust <- subset(produccion_indust, Date >= fecha_predefinida)
 
@@ -231,6 +231,8 @@ ggplot(PNB, aes(x = Date, y = Index)) +
        y = "Índice") +
   theme_minimal()
 
+###################################################################################
+
 
 # Renombrar las columnas 'Index' en cada dataframe
 names(conf_consum)[2] <- "conf_consum"
@@ -277,5 +279,4 @@ ggplot(data = as.data.frame(as.table(correlation_matrix)),
        fill = "Correlación") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 
