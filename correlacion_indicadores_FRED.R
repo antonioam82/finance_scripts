@@ -231,6 +231,33 @@ ggplot(PNB, aes(x = Date, y = Index)) +
        y = "Índice") +
   theme_minimal()
 
+#########################################
+
+ticker <- "NFIRSAXDCUSQ"
+
+# Obtener los datos históricos del índice de producción industrial
+getSymbols(ticker, src = "FRED")
+
+GFCF <- data.frame(Date = index(get(ticker)), Index = as.numeric(get(ticker)))
+GFCF
+head(GFCF)
+
+fecha_predefinida <- as.Date("1992-01-01")
+
+GFCF <- subset(GFCF, Date >= fecha_predefinida)
+head(GFCF)
+
+# Visualizar la evolución del índice de producción industrial usando ggplot2
+ggplot(GFCF, aes(x = Date, y = Index)) +
+  geom_line(color = "blue") +
+  labs(title = paste("Evolución de la Formación Bruta de Capital Fijo EEUU (", ticker, ")"),
+       x = "Fecha",
+       y = "Índice") +
+  theme_minimal()
+
+
+
+
 ###################################################################################
 
 
@@ -244,6 +271,7 @@ names(produccion_indust)[2] <- "produccion_indust"
 names(desempleo)[2] <- "desempleo"
 names(prod_in_manu)[2] <- "prod_in_manu"
 names(PNB)[2] <- "PNB"
+names(GFCF)[2] <- "GFCF"
 
 # Combina los dataframes en uno solo
 combined_data <- merge(conf_consum, PIB, by = "Date", all = TRUE)
@@ -254,6 +282,7 @@ combined_data <- merge(combined_data, produccion_indust, by = "Date", all = TRUE
 combined_data <- merge(combined_data, desempleo, by = "Date", all = TRUE)
 combined_data <- merge(combined_data, prod_in_manu, by = "Date", all = TRUE)
 combined_data <- merge(combined_data, PNB, by = "Date", all = TRUE)
+combined_data <- merge(combined_data, GFCF, by = "Date", all = TRUE)
 
 # Selecciona las fechas a partir de la fecha predefinida
 combined_data <- subset(combined_data, Date >= fecha_predefinida)
