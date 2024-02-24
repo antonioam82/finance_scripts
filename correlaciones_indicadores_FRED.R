@@ -12,7 +12,6 @@ getSymbols(ticker, src = "FRED")
 conf_consum <- data.frame(Date = index(get(ticker)), Index = as.numeric(get(ticker)))
 conf_consum
 head(conf_consum)
-
 fecha_predefinida <- as.Date("1992-01-01")
 
 conf_consum <- subset(conf_consum, Date >= fecha_predefinida)
@@ -20,7 +19,7 @@ conf_consum <- subset(conf_consum, Date >= fecha_predefinida)
 # Visualizar la evolución del índice de producción industrial usando ggplot2
 ggplot(conf_consum, aes(x = Date, y = Index)) +
   geom_line(color = "blue") +
-  labs(title = paste("Evolución del Indice de Confianza del cOnsumidos (", ticker, ")"),
+  labs(title = paste("Evolución del Indice de Confianza del consumidor (", ticker, ")"),
        x = "Fecha",
        y = "Índice") +
   theme_minimal()
@@ -45,7 +44,7 @@ PIB <- subset(PIB, Date >= fecha_predefinida)
 # Visualizar la evolución del índice de producción industrial usando ggplot2
 ggplot(PIB, aes(x = Date, y = Index)) +
   geom_line(color = "blue") +
-  labs(title = paste("Evolución del Porducto Interior Bruto EEUU (", ticker, ")"),
+  labs(title = paste("Evolución del Producto Interior Bruto Real EEUU (", ticker, ")"),
        x = "Fecha",
        y = "Índice") +
   theme_minimal()
@@ -128,6 +127,9 @@ ggplot(tasa_inflaccion, aes(x = Date, y = Index)) +
 
 #################
 
+library(quantmod)
+library(ggplot2)
+
 ticker <- "INDPRO"
 
 
@@ -139,7 +141,7 @@ produccion_indust <- data.frame(Date = index(get(ticker)), Index = as.numeric(ge
 produccion_indust
 head(produccion_indust)
 
-fecha_predefinida <- as.Date("1992-01-01")
+fecha_predefinida <- as.Date("1970-01-01")
 
 produccion_indust <- subset(produccion_indust, Date >= fecha_predefinida)
 
@@ -203,6 +205,33 @@ ggplot(prod_in_manu, aes(x = Date, y = Index)) +
        y = "Índice") +
   theme_minimal()
 
+###################################3
+
+ticker <- "GDP"
+
+
+# Obtener los datos históricos del índice de producción industrial
+getSymbols(ticker, src = "FRED")
+
+# Crear un dataframe con los datos
+PNB <- data.frame(Date = index(get(ticker)), Index = as.numeric(get(ticker)))
+PNB
+head(PNB)
+
+fecha_predefinida <- as.Date("1992-01-01")
+
+PNB <- subset(PNB, Date >= fecha_predefinida)
+head(PNB)
+
+# Visualizar la evolución del índice de producción industrial usando ggplot2
+ggplot(PNB, aes(x = Date, y = Index)) +
+  geom_line(color = "blue") +
+  labs(title = paste("Evolución del Producto Nacional Bruto EEUU (", ticker, ")"),
+       x = "Fecha",
+       y = "Índice") +
+  theme_minimal()
+
+
 # Renombrar las columnas 'Index' en cada dataframe
 names(conf_consum)[2] <- "conf_consum"
 names(PIB)[2] <- "PIB"
@@ -212,6 +241,7 @@ names(tasa_inflaccion)[2] <- "tasa_inflaccion"
 names(produccion_indust)[2] <- "produccion_indust"
 names(desempleo)[2] <- "desempleo"
 names(prod_in_manu)[2] <- "prod_in_manu"
+names(PNB)[2] <- "PNB"
 
 # Combina los dataframes en uno solo
 combined_data <- merge(conf_consum, PIB, by = "Date", all = TRUE)
@@ -221,6 +251,7 @@ combined_data <- merge(combined_data, tasa_inflaccion, by = "Date", all = TRUE)
 combined_data <- merge(combined_data, produccion_indust, by = "Date", all = TRUE)
 combined_data <- merge(combined_data, desempleo, by = "Date", all = TRUE)
 combined_data <- merge(combined_data, prod_in_manu, by = "Date", all = TRUE)
+combined_data <- merge(combined_data, PNB, by = "Date", all = TRUE)
 
 # Selecciona las fechas a partir de la fecha predefinida
 combined_data <- subset(combined_data, Date >= fecha_predefinida)
@@ -246,3 +277,5 @@ ggplot(data = as.data.frame(as.table(correlation_matrix)),
        fill = "Correlación") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
