@@ -12,6 +12,7 @@ getSymbols(ticker, src = "FRED")
 conf_consum <- data.frame(Date = index(get(ticker)), Index = as.numeric(get(ticker)))
 conf_consum
 head(conf_consum)
+
 fecha_predefinida <- as.Date("1992-01-01")
 
 conf_consum <- subset(conf_consum, Date >= fecha_predefinida)
@@ -126,9 +127,6 @@ ggplot(tasa_inflaccion, aes(x = Date, y = Index)) +
   theme_minimal()
 
 #################
-
-library(quantmod)
-library(ggplot2)
 
 ticker <- "INDPRO"
 
@@ -308,4 +306,3 @@ ggplot(data = as.data.frame(as.table(correlation_matrix)),
        fill = "Correlación") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
