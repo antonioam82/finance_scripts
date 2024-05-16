@@ -11,7 +11,7 @@ end_date <- Sys.Date()  # Fecha actual
 getSymbols(ticker, from = start_date, to = end_date)
 
 # Calcular la capitalización de mercado (precio de cierre * número de acciones en circulación)
-market_cap <- Cl(get(ticker)) * Op(get(ticker))
+market_cap <- Cl(get(ticker)) * Vo(get(ticker))
 tail(market_cap)
 
 # Graficar la evolución de la capitalización de mercado
@@ -27,15 +27,17 @@ library(quantmod)
 library(ggplot2)
 
 # Definir el símbolo de la acción y el rango de fechas
-ticker <- "NVDA"
+ticker <- "GOOGL"
 start_date <- "2020-01-01"
 end_date <- Sys.Date()
 
 # Obtener los datos históricos de la acción
 getSymbols(ticker, from = start_date, to = end_date)
+head(GOOGL)
 
 # Calcular la capitalización de mercado (precio de cierre * número de acciones en circulación)
-market_cap <- Cl(get(ticker)) * Op(get(ticker))
+market_cap <- Cl(get(ticker)) * Vo(get(ticker))
+tail(market_cap)
 
 # Convertir la serie temporal a un dataframe
 market_cap_df <- data.frame(Date = index(market_cap), MarketCap = as.numeric(market_cap))
@@ -47,3 +49,4 @@ ggplot(market_cap_df, aes(x = Date, y = MarketCap)) +
        x = "Fecha", y = "Capitalización de Mercado (en USD)") +
   theme_minimal() +
   theme(legend.position = "top", legend.title = element_blank(), legend.text = element_text(color = "blue"))
+
