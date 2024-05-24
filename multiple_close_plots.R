@@ -1,8 +1,8 @@
 library(tidyverse)
 library(tidyquant)
-library(gganimate)#
-library(av)#
-library(gifski)#
+#library(gganimate)#
+#library(av)#
+#library(gifski)#
 
 ACCIONES <- tq_get(c("GOOGL","AMZN","PFE","AAPL"),
                    get="stock.prices")
@@ -19,5 +19,5 @@ ACCIONES %>%
   theme(legend.position = "none")+
   xlab(NULL)+
   ylab(NULL)+
-  ggtitle("Precio de Cierre de Apple, Amazon, Google y Pfeize",
+  ggtitle("Precio de Cierre de Apple, Amazon, Google y Pfeizer",
           subtitle = paste("Desde ", fecha_inicial, " hasta ", fecha_final))
