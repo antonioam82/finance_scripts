@@ -32,7 +32,7 @@ financial_data <- av_get(symbol = ticker, datatype = "json", av_fun = "OVERVIEW"
 str(financial_data)
 
 # Extraer la descripción de financial_data
-description <- financial_data$value[financial_data$rank_group == "Description"]
+#description <- financial_data$value[financial_data$rank_group == "Description"]
 description <- financial_data$value[4]
 description
 
