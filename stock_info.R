@@ -3,19 +3,19 @@
 #install.packages("ggplot2")
 library(alphavantager)
 library(quantmod)
-library(ggplot2)
+#library(ggplot2)
 
 av_api_key("tu_clave_api_aqui")
 
 # Definir el símbolo de la acción
-ticker <- "QCOM"
+ticker <- "META"
 
 # Obtener datos financieros clave utilizando la función `av_get`
 financial_data <- av_get(symbol = ticker, datatype = "json", av_fun = "OVERVIEW")
 #financial_data <- av_get(symbol = ticker, datatype = "json", av_fun = "GLOBAL_QUOTE")
 
 # Mostrar todas las columnas disponibles en financial_data
-print(financial_data)
+print(financial_data,n=51)
 
 ################################################################################
 
