@@ -9,6 +9,7 @@
 # en las carteras.
 
 library(quantmod)
+library(qrmtools)
 
 # Símbolos de las acciones de las empresas
 # Reemplaza estos símbolos con los de las empresas que deseas analizar
@@ -25,6 +26,7 @@ price_data <- na.omit(Ad(merge(get(symbols[1]), get(symbols[2]), get(symbols[3])
 
 # Calcular los retornos diarios
 returns_data <- 100 * na.omit(returns(price_data))
+returns_data
 
 # Calcular la matriz de correlación
 correlation_matrix <- cor(returns_data)
